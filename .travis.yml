@@ -9,3 +9,6 @@ before_script:
   - php composer.phar update
 
 script: phpunit --coverage-text --configuration phpunit.travis.xml
+
+notifications:
+  email: false
