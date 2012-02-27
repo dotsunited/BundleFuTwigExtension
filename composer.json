@@ -1,0 +1,26 @@
+{
+    "name": "dotsunited/bundlefu-twig-extension",
+    "type": "library",
+    "description": "Twig extension for BundleFu",
+    "keywords": ["twig", "extension", "css", "javascript", "bundling", "asset"],
+    "homepage": "https://github.com/dotsunited/BundleFuTwigExtension",
+    "version": "0.9.0",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Jan Sorgalla",
+            "email": "jan.sorgalla@dotsunited.de",
+            "homepage": "http://dotsunited.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "dotsunited/bundlefu": "dev-master",
+        "twig/twig": ">=1.1,<2.0-dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "DotsUnited\\BundleFu\\Twig": "src/"
+        }
+    }
+}

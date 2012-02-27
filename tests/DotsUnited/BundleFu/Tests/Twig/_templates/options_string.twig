@@ -1,0 +1,16 @@
+<html>
+{% bundle name='test_bundle'
+
+          bypass=false
+          render_as_xhtml=true
+          css_filter='css_filter'
+          js_filter='js_filter'
+          css_cache_path='cache'
+          js_cache_path='cache'
+          css_cache_url='/cache'
+          js_cache_url='/cache'
+%}
+<link href="/css_1.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="/js_1.js" type="text/javascript"></script>
+{% endbundle %}
+</html>
