@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "dotsunited/bundlefu": "dev-master",
+        "dotsunited/bundlefu": ">=0.9.1",
         "twig/twig": ">=1.1,<2.0-dev"
     },
     "autoload": {
