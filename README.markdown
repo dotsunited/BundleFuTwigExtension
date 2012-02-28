@@ -1,7 +1,7 @@
 Twig extension for BundleFu
 ===========================
 
-[![Build Status](https://secure.travis-ci.org/dotsunited/BundleFuTwigExtension.png)](http://travis-ci.org/dotsunited/BundleFuTwigExtension)
+[![Build Status](https://secure.travis-ci.org/dotsunited/BundleFuTwigExtension.png?branch=master)](http://travis-ci.org/dotsunited/BundleFuTwigExtension)
 
 The BundleFuTwigExtension integrates [BundleFu](https://github.com/dotsunited/BundleFu) into the [Twig template engine](http://twig.sensiolabs.org).
 
