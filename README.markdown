@@ -8,7 +8,7 @@ The BundleFuTwigExtension integrates [BundleFu](https://github.com/dotsunited/Bu
 Installation
 ------------
 
-BundleFuTwigExtension can be installed using the [Composer](http://packagist.org) tool. You can either add `dotsunited/bundlefu-twig-extension` to your package dependencies, or if you want to install BundleFuTwigExtension as standalone, go to the main directory of this package and run:
+BundleFuTwigExtension can be installed using the [Composer](http://packagist.org) tool. You can either add `dotsunited/bundlefu-twig-extension` to the dependencies in your composer.json, or if you want to install BundleFuTwigExtension as standalone, go to the main directory and run:
 
 ```bash
 $ wget http://getcomposer.org/composer.phar 
