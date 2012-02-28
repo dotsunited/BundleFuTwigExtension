@@ -26,13 +26,6 @@ class BundleFuExtension extends \Twig_Extension
         $this->filters = $filters;
     }
 
-    public function getGlobals()
-    {
-        return array(
-            'bundlefu' => $this->options,
-        );
-    }
-
     public function addOption($name, $value)
     {
         $this->options[$name] = $value;
