@@ -4,7 +4,7 @@
     "description": "Twig extension for BundleFu",
     "keywords": ["twig", "extension", "css", "javascript", "bundling", "asset"],
     "homepage": "https://github.com/dotsunited/BundleFuTwigExtension",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "license": "New BSD",
     "authors": [
         {
