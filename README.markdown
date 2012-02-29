@@ -23,6 +23,42 @@ require 'vendor/.composer/autoload.php';
 ?>
 ```
 
+Usage
+-----
+
+Register the BundleFuExtension to your Twig environment:
+
+```php
+<?php
+$factory = new \DotsUnited\BundleFu\Factory();
+$extension = \DotsUnited\BundleFu\Twig\BundleFuExtension($factory);
+
+$twig = new \Twig_Environment($loader);
+$twig->addExtension($extension);
+?>
+```
+
+The extension uses the factory to create bundle instances. See the [BundleFu documentation](https://github.com/dotsunited/BundleFu#readme) about how to configure the factory.
+
+The extension exposes a new `bundlefu` tag with the following sytnax:
+
+```html
+{% bundle name='test_bundle'
+          doc_root = '/my/docroot'
+          bypass=false
+          render_as_xhtml=true
+          css_filter='css_filter'
+          js_filter='js_filter'
+          css_cache_path='cache'
+          js_cache_path='cache'
+          css_cache_url='/cache'
+          js_cache_url='/cache'
+%}
+<link href="/css_1.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="/js_1.js" type="text/javascript"></script>
+{% endbundle %}
+```
+
 License
 -------
 
