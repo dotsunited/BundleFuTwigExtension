@@ -11,7 +11,6 @@
 
 namespace DotsUnited\BundleFu\Twig;
 
-use DotsUnited\BundleFu\Bundle;
 use DotsUnited\BundleFu\Factory;
 use DotsUnited\BundleFu\Filter\FilterInterface;
 use DotsUnited\BundleFu\Twig\TokenParser\BundleTokenParser;
