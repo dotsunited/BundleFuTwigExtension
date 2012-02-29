@@ -11,7 +11,6 @@
 
 namespace DotsUnited\BundleFu\Tests\Twig;
 
-use DotsUnited\BundleFu\Tests\TestCase;
 use DotsUnited\BundleFu\Twig\BundleFuExtension;
 
 class BundleFuExtensionTest extends \PHPUnit_Framework_TestCase
