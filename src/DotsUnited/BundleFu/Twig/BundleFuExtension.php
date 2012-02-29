@@ -20,7 +20,7 @@ class BundleFuExtension extends \Twig_Extension
     /**
      * @var \DotsUnited\BundleFu\Factory
      */
-    protected $factory = array();
+    protected $factory;
 
     /**
      * @param \DotsUnited\BundleFu\Factory $factory
