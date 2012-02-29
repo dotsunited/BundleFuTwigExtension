@@ -21,120 +21,77 @@ class BundleFuExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private $twig;
 
+    /**
+     * @var \DotsUnited\BundleFu\Bundle
+     */
+    private $bundle;
+
+    /**
+     * @var \DotsUnited\BundleFu\Factory
+     */
+    private $factory;
+
+    /**
+     * @var array
+     */
+    private $options;
+
     public function setUp()
     {
-        if (!class_exists('Twig_Environment')) {
+        if (!class_exists('\\Twig_Environment')) {
             $this->markTestSkipped('Twig is not installed.');
         }
 
-        $options = array(
-            'doc_root' => __DIR__.'/_files',
-            'render_as_xhtml' => true
-        );
-
-        $this->twig = new \Twig_Environment();
-        $this->twig->setLoader(new \Twig_Loader_Filesystem(__DIR__.'/_templates'));
-        $this->twig->addExtension(new BundleFuExtension($options, array()));
-    }
-    
-    public function tearDown()
-    {
-        $paths = array(
-            __DIR__ . '/_files/cache',
-        );
-
-        foreach ($paths as $path) {
-            if (!file_exists($path)) {
-                continue;
-            }
-
-            foreach (glob($path . '/*') as $file) {
-                if ($file[0] == '.') {
-                    continue;
-                }
-                unlink($file);
-            }
-
-            rmdir($path);
-        }
-    }
-
-    public function testOptionsAsString()
-    {
-        $cssFilter = $this->getMock('DotsUnited\\BundleFu\\Filter\\FilterInterface');
-        $cssFilter->expects($this->once())
-            ->method('filter');
-
-        $jsFilter = $this->getMock('DotsUnited\\BundleFu\\Filter\\FilterInterface');
-        $jsFilter->expects($this->once())
-            ->method('filter');
-
-        $this->twig->getExtension('bundlefu')
-            ->addFilter('css_filter', $cssFilter);
-
-        $this->twig->getExtension('bundlefu')
-            ->addFilter('js_filter', $jsFilter);
-
-        $xml = $this->renderXml('options_string.twig');
-
-        $this->assertEquals(1, count($xml->script));
-        $this->assertStringStartsWith('/cache/test_bundle', (string) $xml->script['src']);
-
-        $this->assertEquals(1, count($xml->link));
-        $this->assertStringStartsWith('/cache/test_bundle', (string) $xml->link['href']);
-    }
-
-    public function testOptionsAsVariables()
-    {
-        $cssFilter = $this->getMock('DotsUnited\\BundleFu\\Filter\\FilterInterface');
-        $cssFilter->expects($this->once())
-            ->method('filter');
-
-        $jsFilter = $this->getMock('DotsUnited\\BundleFu\\Filter\\FilterInterface');
-        $jsFilter->expects($this->once())
-            ->method('filter');
-
-        $this->twig->getExtension('bundlefu')
-            ->addOption('doc_root', '/')
-            ->addOption('bypass', true)
-            ->addOption('render_as_xhtml', false);
-
-        $context = array(
+        $this->options = array(
             'name' => 'test_bundle',
-            'doc_root' => __DIR__.'/_files',
+            'doc_root' => '/my/docroot',
             'bypass' => false,
             'render_as_xhtml' => true,
-            'css_filter' => $cssFilter,
-            'js_filter' => $jsFilter,
+            'css_filter' => 'css_filter',
+            'js_filter' => 'js_filter',
             'css_cache_path' => 'cache',
             'js_cache_path' => 'cache',
             'css_cache_url' => '/cache',
             'js_cache_url' => '/cache',
         );
 
-        $xml = $this->renderXml('options_variable.twig', $context);
+        $this->bundle = $this->getMock('DotsUnited\\BundleFu\\Bundle');
 
-        $this->assertEquals(1, count($xml->script));
-        $this->assertStringStartsWith('/cache/test_bundle', (string) $xml->script['src']);
+        $this->bundle
+            ->expects($this->at(0))
+            ->method('start')
+            ->will($this->returnSelf());
 
-        $this->assertEquals(1, count($xml->link));
-        $this->assertStringStartsWith('/cache/test_bundle', (string) $xml->link['href']);
+        $this->bundle
+            ->expects($this->at(1))
+            ->method('end')
+            ->will($this->returnSelf());
+
+        $this->bundle
+            ->expects($this->at(2))
+            ->method('render')
+            ->will($this->returnValue(''));
+
+        $this->factory = $this->getMock('DotsUnited\\BundleFu\\Factory');
+
+        $this->factory
+            ->expects($this->once())
+            ->method('createBundle')
+            ->with($this->equalTo($this->options))
+            ->will($this->returnValue($this->bundle));
+
+        $this->twig = new \Twig_Environment();
+        $this->twig->setLoader(new \Twig_Loader_Filesystem(__DIR__.'/_templates'));
+        $this->twig->addExtension(new BundleFuExtension($this->factory));
     }
 
-    public function testUnregisteredCssFilterThrowsException()
+    public function testOptionsAsString()
     {
-        $this->setExpectedException('\Twig_Error_Runtime', 'There is no filter with the name "foo" registered.');
-        $this->renderXml('unregistered_css_filter.twig');
-    }
-    
-    public function testUnregisteredJsFilterThrowsException()
-    {
-        $this->setExpectedException('\Twig_Error_Runtime', 'There is no filter with the name "foo" registered.');
-        $this->renderXml('unregistered_js_filter.twig');
+        $this->twig->loadTemplate('options_string.twig')->render(array());
     }
 
-    private function renderXml($name, $context = array())
+    public function testOptionsAsVariables()
     {
-        return new \SimpleXMLElement($this->twig->loadTemplate($name)->render($context));
+        $this->twig->loadTemplate('options_variable.twig')->render($this->options);
     }
 }

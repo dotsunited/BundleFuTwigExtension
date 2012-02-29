@@ -12,58 +12,40 @@
 namespace DotsUnited\BundleFu\Twig;
 
 use DotsUnited\BundleFu\Bundle;
+use DotsUnited\BundleFu\Factory;
 use DotsUnited\BundleFu\Filter\FilterInterface;
 use DotsUnited\BundleFu\Twig\TokenParser\BundleTokenParser;
 
 class BundleFuExtension extends \Twig_Extension
 {
-    protected $options = array();
-    protected $filters = array();
+    /**
+     * @var \DotsUnited\BundleFu\Factory
+     */
+    protected $factory = array();
 
-    public function __construct(array $options = array(), array $filters = array())
+    /**
+     * @param \DotsUnited\BundleFu\Factory $factory
+     */
+    public function __construct(Factory $factory)
     {
-        $this->options = $options;
-        $this->filters = $filters;
+        $this->factory = $factory;
     }
 
-    public function addOption($name, $value)
+    /**
+     * @return \DotsUnited\BundleFu\Factory
+     */
+    public function getFactory()
     {
-        $this->options[$name] = $value;
-
-        return $this;
+        return $this->factory;
     }
 
-    public function addFilter($name, FilterInterface $filter)
-    {
-        $this->filters[$name] = $filter;
-
-        return $this;
-    }
-
+    /**
+     * @param array $options
+     * @return \DotsUnited\BundleFu\Bundle
+     */
     public function createBundle(array $options = array())
     {
-        $options = array_merge($this->options, $options);
-
-        if (isset($options['css_filter']) && is_string($options['css_filter'])) {
-            if (!isset($this->filters[$options['css_filter']])) {
-                throw new \Twig_Error_Runtime('There is no filter with the name "' . $options['css_filter'] . '" registered.');
-            }
-
-            $options['css_filter'] = $this->filters[$options['css_filter']];
-        }
-
-        if (isset($options['js_filter']) && is_string($options['js_filter'])) {
-            if (!isset($this->filters[$options['js_filter']])) {
-                 throw new \Twig_Error_Runtime('There is no filter with the name "' . $options['js_filter'] . '" registered.');
-            }
-
-            $options['js_filter'] = $this->filters[$options['js_filter']];
-        }
-
-        $bundle = new Bundle();
-        $bundle->setOptions($options);
-
-        return $bundle;
+        return $this->getFactory()->createBundle($options);
     }
 
     public function getTokenParsers()
