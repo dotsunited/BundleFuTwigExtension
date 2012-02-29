@@ -40,7 +40,7 @@ $twig->addExtension($extension);
 
 The extension uses the factory to create bundle instances. See the [BundleFu documentation](https://github.com/dotsunited/BundleFu#readme) about how to configure the factory.
 
-The extension exposes a new `bundle` tag with the following sytnax:
+The extension exposes a new `bundle` tag with the following syntax:
 
 ```html
 {% bundle name='test_bundle'
