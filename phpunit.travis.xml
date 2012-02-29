@@ -11,12 +11,12 @@
          bootstrap="tests/bootstrap.php"
 >
     <testsuite name="BundleFuTwigExtension Test Suite">
-        <directory>./tests/DotsUnited/BundleFu/</directory>
+        <directory>./tests/DotsUnited/BundleFu/Tests/Twig/</directory>
     </testsuite>
 
     <filter>
         <whitelist>
-            <directory>./src/DotsUnited/BundleFu/</directory>
+            <directory>./src/DotsUnited/BundleFu/Twig/</directory>
         </whitelist>
     </filter>
 </phpunit>
