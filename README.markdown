@@ -62,4 +62,4 @@ The extension exposes a new `bundle` tag with the following syntax:
 License
 -------
 
-BundleFuTwigExtension is released under the [New BSD License](https://github.com/dotsunited/BundleFuTwigExtension/blob/master/LICENSE).
+BundleFuTwigExtension is released under the [MIT License](https://github.com/dotsunited/BundleFuTwigExtension/blob/master/LICENSE).

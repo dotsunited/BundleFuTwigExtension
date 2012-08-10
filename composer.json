@@ -3,7 +3,7 @@
     "description": "Twig extension for BundleFu",
     "keywords": ["twig", "extension", "css", "javascript", "bundling", "asset"],
     "homepage": "https://github.com/dotsunited/BundleFuTwigExtension",
-    "license": "New BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jan Sorgalla",
