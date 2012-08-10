@@ -12,7 +12,6 @@
 namespace DotsUnited\BundleFu\Twig;
 
 use DotsUnited\BundleFu\Factory;
-use DotsUnited\BundleFu\Filter\FilterInterface;
 use DotsUnited\BundleFu\Twig\TokenParser\BundleTokenParser;
 
 class BundleFuExtension extends \Twig_Extension
@@ -39,7 +38,7 @@ class BundleFuExtension extends \Twig_Extension
     }
 
     /**
-     * @param array $options
+     * @param  array                       $options
      * @return \DotsUnited\BundleFu\Bundle
      */
     public function createBundle(array $options = array())
