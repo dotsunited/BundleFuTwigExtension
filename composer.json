@@ -20,5 +20,10 @@
         "psr-0": {
             "DotsUnited\\BundleFu\\Twig": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1-dev"
+        }
     }
 }
